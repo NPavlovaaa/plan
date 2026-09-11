@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Япония · 20.11 — 04.12.2026</title>
+<meta name="description" content="Одностраничный путеводитель по маршруту Осака → Идзу → Токио для четверых">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600&family=Onest:wght@300;400;500;600&display=swap&subset=cyrillic,cyrillic-ext,latin,latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body x-data="trip" x-cloak>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="#top" class="topnav-brand">日本 · 15д</a>
+    <a href="#quick"     data-navlink="quick">Обзор</a>
+    <a href="#kansai"    data-navlink="kansai">関西 Кансай</a>
+    <a href="#izu"       data-navlink="izu">伊豆 Идзу</a>
+    <a href="#tokyo"     data-navlink="tokyo">東京 Токио</a>
+    <a href="#budget"    data-navlink="budget">Бюджет</a>
+    <a href="#luggage"   data-navlink="luggage">Багаж</a>
+    <a href="#shops"     data-navlink="shops">Продукты</a>
+    <a href="#hotels"    data-navlink="hotels">Отели</a>
+    <a href="#checklist" data-navlink="checklist">Чек-лист</a>
+    <a href="#verify"    data-navlink="verify">Проверить</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top" class="hero" data-anchor>
+  <div class="hero-bg" style="background-image:url('https://commons.wikimedia.org/wiki/Special:FilePath/Chureito%20Pagoda%20and%20Mount%20Fuji%2020241022.jpg?width=1800')"></div>
+  <div class="wrap" style="display:flex; flex-direction:column; gap:0; flex:1;">
+    <div class="hero-meta">
+      <div class="tiny">日本 · Nihon · 2026</div>
+      <div class="tiny muted">20 ноября — 04 декабря · 15 дней · 4 человека</div>
+    </div>
+
+    <div class="hero-title">
+      <div class="jp">秋の日本 — момидзи, онсэн, Дайбуцу</div>
+      <h1 class="h1 font-display">Япония</h1>
+      <p class="hero-sub">
+        Осенний маршрут для четверых. Осака (шесть ночей, база в Тэмма, вылазки в Киото и Нару) → рёкан на Идзу (одна ночь, ротенбуро и капибары) → Токио (семь ночей, Фукагава). Всё, что нужно найти с телефона в пути: время, транспорт, цены в йенах, планы на дождь, красные флаги по билетам.
+      </p>
+    </div>
+
+    <div class="route">
+      <span>大阪</span><span class="sep">→</span>
+      <span>伊豆</span><span class="sep">→</span>
+      <span>東京</span>
+      <span style="flex:1"></span>
+      <span class="tiny muted">6 · 1 · 7 ночей</span>
+    </div>
+
+    <div class="facts">
+      <template x-for="f in facts" :key="f.l">
+        <div class="fact">
+          <div class="l" x-text="f.l"></div>
+          <div class="v" x-text="f.v"></div>
+        </div>
+      </template>
+    </div>
+  </div>
+</header>
+
+<!-- QUICK NAV -->
+<section id="quick" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">01 · Быстрая навигация</div>
+    <h2 class="h2 font-display" data-rise>Пятнадцать дней в одной сетке</h2>
+    <p class="muted" style="max-width:640px; margin-top:8px">Каждая плитка ведёт к развёрнутой карточке дня с таймлайном и заметками. Иероглифический бейдж отмечает особые дни.</p>
+
+    <div class="grid-days" data-rise>
+      <template x-for="d in days" :key="d.id">
+        <a class="grid-day" :href="'#' + d.id">
+          <div class="top">
+            <div>
+              <div class="date" x-text="d.date"></div>
+              <div class="dow" x-text="d.dow"></div>
+            </div>
+            <div class="em" x-text="d.em"></div>
+          </div>
+          <div class="title" x-text="d.title"></div>
+          <div class="short" x-text="d.short"></div>
+          <div class="reg"
+               :class="'reg-' + d.region"
+               x-text="d.region === 'kansai' ? '関西 Kansai' : d.region === 'izu' ? '伊豆 Izu' : '東京 Tokyo'"></div>
+        </a>
+      </template>
+    </div>
+
+    <div class="legend">
+      <span><b>🎌</b> — японский праздник, будет людно</span>
+      <span><b>⚡</b> — группа расходится / есть варианты</span>
+      <span><b>🃏</b> — джокер, решается по погоде</span>
+    </div>
+  </div>
+</section>
+
+<!-- KANSAI -->
+<section id="kansai" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">02 · 関西 Кансай</div>
+    <div class="region-h">
+      <div class="jp">関西</div>
+      <div class="en">
+        <div class="k font-display">Kansai · Ōsaka base</div>
+        <div class="d">20 — 25 ноября · шесть ночей</div>
+      </div>
+    </div>
+
+    <template x-for="d in regionDays('kansai')" :key="d.id">
+      <article class="day" :id="d.id" data-rise>
+        <div class="day-photo" x-data="carousel(d.imgsA || d.imgs || [], d.imgsB || [], d.id)" :class="{ 'no-img': !hasImg }">
+          <div class="carousel-track" x-ref="track" @scroll.passive="onScroll($event)">
+            <template x-for="s in liveSlides" :key="s.k">
+              <div class="slide">
+                <img :src="s.u" :alt="d.title" loading="lazy" @error="fail(s.k)">
+                <div class="slide-cap" x-show="s.cap" x-text="s.cap"></div>
+              </div>
+            </template>
+          </div>
+          <div class="ph">
+            <div class="jp" x-text="d.ph.jp"></div>
+            <div class="ro" x-text="d.ph.ro"></div>
+          </div>
+          <button class="carousel-arr prev" type="button" @click="prev()"
+                  x-show="liveSlides.length > 1" aria-label="Предыдущее фото">‹</button>
+          <button class="carousel-arr next" type="button" @click="next()"
+                  x-show="liveSlides.length > 1" aria-label="Следующее фото">›</button>
+          <div class="carousel-dots" x-show="liveSlides.length > 1" role="tablist">
+            <template x-for="(s, idx) in liveSlides" :key="s.k">
+              <button class="dot" type="button" :class="{ on: idx === i }"
+                      @click="go(idx)" :aria-label="'Слайд ' + (idx+1)" :aria-selected="idx === i"></button>
+            </template>
+          </div>
+          <div class="carousel-count" x-show="liveSlides.length > 1"
+               x-text="(i+1) + ' / ' + liveSlides.length"></div>
+          <div class="day-badge" x-show="d.em" x-text="d.em"></div>
+        </div>
+
+        <div class="day-head">
+          <div class="date">
+            <span x-text="d.date"></span><span class="dow" x-text="d.dow"></span>
+          </div>
+          <div class="title" x-text="d.title"></div>
+        </div>
+
+        <template x-if="!d.variants">
+          <div>
+            <template x-for="(b, bi) in d.blocks" :key="bi">
+              <div class="block">
+                <div class="block-h" x-text="b.h"></div>
+                <table class="timeline">
+                  <tbody>
+                    <template x-for="(r, ri) in b.rows" :key="ri">
+                      <tr>
+                        <td class="t mono" x-text="r[0]"></td>
+                        <td class="a" x-html="r[1]"></td>
+                        <td class="y" x-text="r[2]"></td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </template>
+          </div>
+        </template>
+
+        <template x-if="d.variants">
+          <div>
+            <div class="block">
+              <div class="var-switch" role="tablist" :aria-label="'Варианты для ' + d.date">
+                <button role="tab" :class="{ on: $store.trip.variants[d.id] === 'A' }"
+                        :aria-selected="$store.trip.variants[d.id] === 'A'"
+                        @click="$store.trip.setVar(d.id, 'A')">Вариант A</button>
+                <button role="tab" :class="{ on: $store.trip.variants[d.id] === 'B' }"
+                        :aria-selected="$store.trip.variants[d.id] === 'B'"
+                        @click="$store.trip.setVar(d.id, 'B')">Вариант B</button>
+              </div>
+            </div>
+            <template x-for="(b, bi) in d.blocks" :key="bi">
+              <div class="block" x-show="$store.trip.variants[d.id] === b.var">
+                <div class="block-h" x-text="b.h"></div>
+                <table class="timeline">
+                  <tbody>
+                    <template x-for="(r, ri) in b.rows" :key="ri">
+                      <tr>
+                        <td class="t mono" x-text="r[0]"></td>
+                        <td class="a" x-html="r[1]"></td>
+                        <td class="y" x-text="r[2]"></td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </template>
+          </div>
+        </template>
+
+        <div class="notes">
+          <template x-for="(n, ni) in d.notes" :key="ni">
+            <div class="note" :class="n.t">
+              <div class="l" x-text="n.l"></div>
+              <div class="x" x-html="n.x"></div>
+            </div>
+          </template>
+        </div>
+      </article>
+    </template>
+  </div>
+</section>
+
+<!-- IZU -->
+<section id="izu" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">03 · 伊豆 Идзу</div>
+    <div class="region-h">
+      <div class="jp">伊豆</div>
+      <div class="en">
+        <div class="k font-display">Izu-Kōgen · рёкан</div>
+        <div class="d">26 ноября · одна ночь</div>
+      </div>
+    </div>
+
+    <template x-for="d in regionDays('izu')" :key="d.id">
+      <article class="day" :id="d.id" data-rise>
+        <div class="day-photo" x-data="carousel(d.imgsA || d.imgs || [], d.imgsB || [], d.id)" :class="{ 'no-img': !hasImg }">
+          <div class="carousel-track" x-ref="track" @scroll.passive="onScroll($event)">
+            <template x-for="s in liveSlides" :key="s.k">
+              <div class="slide">
+                <img :src="s.u" :alt="d.title" loading="lazy" @error="fail(s.k)">
+                <div class="slide-cap" x-show="s.cap" x-text="s.cap"></div>
+              </div>
+            </template>
+          </div>
+          <div class="ph">
+            <div class="jp" x-text="d.ph.jp"></div>
+            <div class="ro" x-text="d.ph.ro"></div>
+          </div>
+          <button class="carousel-arr prev" type="button" @click="prev()"
+                  x-show="liveSlides.length > 1" aria-label="Предыдущее фото">‹</button>
+          <button class="carousel-arr next" type="button" @click="next()"
+                  x-show="liveSlides.length > 1" aria-label="Следующее фото">›</button>
+          <div class="carousel-dots" x-show="liveSlides.length > 1" role="tablist">
+            <template x-for="(s, idx) in liveSlides" :key="s.k">
+              <button class="dot" type="button" :class="{ on: idx === i }"
+                      @click="go(idx)" :aria-label="'Слайд ' + (idx+1)" :aria-selected="idx === i"></button>
+            </template>
+          </div>
+          <div class="carousel-count" x-show="liveSlides.length > 1"
+               x-text="(i+1) + ' / ' + liveSlides.length"></div>
+          <div class="day-badge" x-show="d.em" x-text="d.em"></div>
+        </div>
+
+        <div class="day-head">
+          <div class="date"><span x-text="d.date"></span><span class="dow" x-text="d.dow"></span></div>
+          <div class="title" x-text="d.title"></div>
+        </div>
+
+        <template x-for="(b, bi) in d.blocks" :key="bi">
+          <div class="block">
+            <div class="block-h" x-text="b.h"></div>
+            <table class="timeline">
+              <tbody>
+                <template x-for="(r, ri) in b.rows" :key="ri">
+                  <tr>
+                    <td class="t mono" x-text="r[0]"></td>
+                    <td class="a" x-html="r[1]"></td>
+                    <td class="y" x-text="r[2]"></td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </template>
+
+        <div class="notes">
+          <template x-for="(n, ni) in d.notes" :key="ni">
+            <div class="note" :class="n.t">
+              <div class="l" x-text="n.l"></div>
+              <div class="x" x-html="n.x"></div>
+            </div>
+          </template>
+        </div>
+      </article>
+    </template>
+  </div>
+</section>
+
+<!-- TOKYO -->
+<section id="tokyo" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">04 · 東京 Токио</div>
+    <div class="region-h">
+      <div class="jp">東京</div>
+      <div class="en">
+        <div class="k font-display">Tōkyō · Fukagawa base</div>
+        <div class="d">27 ноября — 04 декабря · семь ночей</div>
+      </div>
+    </div>
+
+    <template x-for="d in regionDays('tokyo')" :key="d.id">
+      <article class="day" :id="d.id" data-rise>
+        <div class="day-photo" x-data="carousel(d.imgsA || d.imgs || [], d.imgsB || [], d.id)" :class="{ 'no-img': !hasImg }">
+          <div class="carousel-track" x-ref="track" @scroll.passive="onScroll($event)">
+            <template x-for="s in liveSlides" :key="s.k">
+              <div class="slide">
+                <img :src="s.u" :alt="d.title" loading="lazy" @error="fail(s.k)">
+                <div class="slide-cap" x-show="s.cap" x-text="s.cap"></div>
+              </div>
+            </template>
+          </div>
+          <div class="ph">
+            <div class="jp" x-text="d.ph.jp"></div>
+            <div class="ro" x-text="d.ph.ro"></div>
+          </div>
+          <button class="carousel-arr prev" type="button" @click="prev()"
+                  x-show="liveSlides.length > 1" aria-label="Предыдущее фото">‹</button>
+          <button class="carousel-arr next" type="button" @click="next()"
+                  x-show="liveSlides.length > 1" aria-label="Следующее фото">›</button>
+          <div class="carousel-dots" x-show="liveSlides.length > 1" role="tablist">
+            <template x-for="(s, idx) in liveSlides" :key="s.k">
+              <button class="dot" type="button" :class="{ on: idx === i }"
+                      @click="go(idx)" :aria-label="'Слайд ' + (idx+1)" :aria-selected="idx === i"></button>
+            </template>
+          </div>
+          <div class="carousel-count" x-show="liveSlides.length > 1"
+               x-text="(i+1) + ' / ' + liveSlides.length"></div>
+          <div class="day-badge" x-show="d.em" x-text="d.em"></div>
+        </div>
+
+        <div class="day-head">
+          <div class="date"><span x-text="d.date"></span><span class="dow" x-text="d.dow"></span></div>
+          <div class="title" x-text="d.title"></div>
+        </div>
+
+        <template x-if="!d.variants">
+          <div>
+            <template x-for="(b, bi) in d.blocks" :key="bi">
+              <div class="block">
+                <div class="block-h" x-text="b.h"></div>
+                <table class="timeline">
+                  <tbody>
+                    <template x-for="(r, ri) in b.rows" :key="ri">
+                      <tr>
+                        <td class="t mono" x-text="r[0]"></td>
+                        <td class="a" x-html="r[1]"></td>
+                        <td class="y" x-text="r[2]"></td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </template>
+          </div>
+        </template>
+
+        <template x-if="d.variants">
+          <div>
+            <div class="block">
+              <div class="var-switch" role="tablist" :aria-label="'Варианты для ' + d.date">
+                <button role="tab" :class="{ on: $store.trip.variants[d.id] === 'A' }"
+                        :aria-selected="$store.trip.variants[d.id] === 'A'"
+                        @click="$store.trip.setVar(d.id, 'A')">Вариант A</button>
+                <button role="tab" :class="{ on: $store.trip.variants[d.id] === 'B' }"
+                        :aria-selected="$store.trip.variants[d.id] === 'B'"
+                        @click="$store.trip.setVar(d.id, 'B')">Вариант B</button>
+              </div>
+            </div>
+            <template x-for="(b, bi) in d.blocks" :key="bi">
+              <div class="block" x-show="$store.trip.variants[d.id] === b.var">
+                <div class="block-h" x-text="b.h"></div>
+                <table class="timeline">
+                  <tbody>
+                    <template x-for="(r, ri) in b.rows" :key="ri">
+                      <tr>
+                        <td class="t mono" x-text="r[0]"></td>
+                        <td class="a" x-html="r[1]"></td>
+                        <td class="y" x-text="r[2]"></td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+            </template>
+          </div>
+        </template>
+
+        <div class="notes">
+          <template x-for="(n, ni) in d.notes" :key="ni">
+            <div class="note" :class="n.t">
+              <div class="l" x-text="n.l"></div>
+              <div class="x" x-html="n.x"></div>
+            </div>
+          </template>
+        </div>
+      </article>
+    </template>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">05 · Бюджет на человека</div>
+    <h2 class="h2 font-display" data-rise>¥ на человека на 15 дней</h2>
+    <p class="muted" style="max-width:640px; margin-top:8px">Ориентир ~$2 800 на человека. Жильё оплачено рублями онлайн заранее — <b>обязательно тариф с предоплатой</b>, при заселении карты МИР не принимают. Курс: $1 ≈ ¥160.</p>
+
+    <table class="budget-table" data-rise>
+      <thead>
+        <tr>
+          <th>Статья</th>
+          <th class="n" style="text-align:right">¥ на человека</th>
+          <th class="n" style="text-align:right">≈ $</th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="(row, i) in budget" :key="i">
+          <tr>
+            <td x-text="row[0]"></td>
+            <td class="n">¥<span :data-count="row[1]" x-text="row[1].toLocaleString('ru-RU')"></span></td>
+            <td class="n">$<span x-text="row[2].toLocaleString('ru-RU')"></span></td>
+          </tr>
+        </template>
+        <tr class="tot">
+          <td>Итого на человека</td>
+          <td class="n">¥<span data-count="447500">447 500</span></td>
+          <td class="n">≈ $2 800</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="notes" style="padding:24px 0 0; display:grid; gap:12px;">
+      <div class="note warn">
+        <div class="l">Конверт</div>
+        <div class="x"><b>Наличные не пополнить</b> — российские карты не работают нигде. Отложите <b>¥170 000</b> в отдельный конверт как неприкосновенное на жизнь: иначе рискуете на десятый день остаться с полным чемоданом и без денег на еду.</div>
+      </div>
+      <div class="note tip">
+        <div class="l">Менять заранее</div>
+        <div class="x">Менять на иены в <b>Москве</b>, не в японском аэропорту.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LUGGAGE -->
+<section id="luggage" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">06 · Багаж</div>
+    <h2 class="h2 font-display" data-rise>Что везём, что <span style="color:var(--momiji)">takkyubin</span></h2>
+
+    <div class="two-col" data-rise>
+      <template x-for="l in luggage" :key="l.h">
+        <div class="lug">
+          <h4 x-text="l.h"></h4>
+          <template x-for="(r, ri) in l.rows" :key="ri">
+            <div class="lug-row">
+              <div class="k" x-text="r[0]"></div>
+              <div x-text="r[1]"></div>
+            </div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <div class="notes" style="padding:24px 0 0; display:grid; gap:12px;">
+      <div class="note tip">
+        <div class="l">Takkyubin</div>
+        <div class="x">Yamato Transport — доставит чемодан из отеля в отель за сутки. Есть стойки прямо на JR-станциях, в конбини (7-Eleven, FamilyMart) и в аэропортах. Незаменим при переездах Osaka→Izu→Tokyo.</div>
+      </div>
+      <div class="note warn">
+        <div class="l">Синкансэн</div>
+        <div class="x">Багаж с суммой трёх измерений (с колёсами) больше <b>158 см</b> — обязательно бронировать «oversized baggage seat» (последний ряд) при покупке билета. Иначе штраф ¥1 000 и место негде поставить.</div>
+      </div>
+      <div class="note tip full">
+        <div class="l">Обувь</div>
+        <div class="x">Новую обувь надеть на обратный рейс, старую в чемодан. Куртка и обувь на себе не взвешиваются.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOPS -->
+<section id="shops" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">07 · Продукты и районы вокруг отелей</div>
+    <h2 class="h2 font-display" data-rise>Где закупаться на месте</h2>
+
+    <div class="two-col" data-rise style="align-items:start;">
+      <template x-for="s in shops" :key="s.h">
+        <div class="shop-card">
+          <h4 x-text="s.h"></h4>
+          <div class="sub" x-text="s.sub"></div>
+          <template x-for="(r, ri) in s.rows" :key="ri">
+            <div class="shop-row">
+              <div class="top">
+                <span class="n" x-text="r.n"></span>
+                <span class="t" x-text="r.t"></span>
+              </div>
+              <div class="w" x-text="r.w"></div>
+              <div class="x" x-html="r.x"></div>
+            </div>
+          </template>
+          <div class="kombini-list">
+            <div class="lbl">Конбини рядом, круглосуточно</div>
+            <ul>
+              <template x-for="(k, ki) in s.kombini" :key="ki">
+                <li x-html="k"></li>
+              </template>
+            </ul>
+          </div>
+          <div class="notes" style="padding-top:16px; grid-template-columns:1fr;">
+            <template x-for="(n, ni) in s.notes" :key="ni">
+              <div class="note" :class="n.t">
+                <div class="l" x-text="n.l"></div>
+                <div class="x" x-html="n.x"></div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <h3 class="h3 font-display" data-rise style="margin-top:48px">Сети, которые везде — планировать не надо</h3>
+    <div class="chains" data-rise>
+      <template x-for="(c, ci) in chains" :key="ci">
+        <div class="row"><b x-text="c[0]"></b><span x-text="c[1]"></span></div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- HOTELS -->
+<section id="hotels" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">08 · Проверить по отелям</div>
+    <h2 class="h2 font-display" data-rise>До заезда — уточнить на месте</h2>
+
+    <div class="two-col" data-rise style="align-items:start;">
+      <template x-for="h in hotels" :key="h.h">
+        <div class="hotel-card">
+          <h4 x-text="h.h"></h4>
+          <ul>
+            <template x-for="(it, ii) in h.items" :key="ii">
+              <li x-html="it"></li>
+            </template>
+          </ul>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">09 · Чек-лист</div>
+    <h2 class="h2 font-display" data-rise>Что забронировать, что не забыть</h2>
+
+    <div class="chk-counter" aria-live="polite">
+      <b x-text="$store.trip.doneCount()"></b>
+      <span>из</span>
+      <span x-text="checklist.reduce((s,g)=>s+g.items.length,0)"></span>
+      <span>пунктов отмечено</span>
+    </div>
+
+    <div data-rise>
+      <template x-for="(g, gi) in checklist" :key="gi">
+        <div class="chk-group">
+          <div class="when" x-text="g.when"></div>
+          <template x-for="(it, ii) in g.items" :key="ii">
+            <button
+              class="chk"
+              :class="{ on: $store.trip.isChecked(gi + '.' + ii) }"
+              @click="$store.trip.toggle(gi + '.' + ii)"
+              :aria-pressed="$store.trip.isChecked(gi + '.' + ii)"
+              :aria-label="'Отметить: ' + it[0].replace(/<[^>]+>/g, '')">
+              <span class="box" aria-hidden="true"></span>
+              <span class="x" x-html="it[0]"></span>
+              <span class="hot" x-show="it[1]" aria-label="горит"></span>
+            </button>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<!-- VERIFY -->
+<section id="verify" class="section" data-anchor>
+  <div class="wrap">
+    <div class="eyebrow">10 · Что ещё проверить</div>
+    <h2 class="h2 font-display" data-rise>Открытые вопросы</h2>
+    <ul class="verify" data-rise>
+      <template x-for="(v, vi) in verify" :key="vi">
+        <li x-text="v"></li>
+      </template>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="tiny">Три вещи горят</div>
+    <div class="fire" data-rise>
+      <div class="item"><b>1.</b> Отели в Кансае — рёкан Идзу 26.11 ещё не забронирован.</div>
+      <div class="item"><b>2.</b> Разговор с начальником про 19–20 ноября.</div>
+      <div class="item"><b>3.</b> Ghibli Park — 10 сентября, 08:00 МСК, Premium-билет. Остальное терпит до сентября.</div>
+    </div>
+
+    <div style="border-top:1px solid var(--line); padding-top:20px; display:flex; gap:20px; flex-wrap:wrap; justify-content:space-between;">
+      <div>© 2026 · Личный путеводитель для четверых · не для перепродажи</div>
+      <div>Фото — Wikimedia Commons, лицензии CC BY-SA / CC BY. Иероглифика — Google Fonts Cormorant.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+<script src="js/motion.js"></script>
+</body>
+</html>
