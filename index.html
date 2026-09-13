@@ -22,7 +22,6 @@
     <a href="#budget"    data-navlink="budget">Бюджет</a>
     <a href="#luggage"   data-navlink="luggage">Багаж</a>
     <a href="#shops"     data-navlink="shops">Продукты</a>
-    <a href="#hotels"    data-navlink="hotels">Отели</a>
     <a href="#checklist" data-navlink="checklist">Чек-лист</a>
     <a href="#verify"    data-navlink="verify">Проверить</a>
   </div>
@@ -532,31 +531,10 @@
   </div>
 </section>
 
-<!-- HOTELS -->
-<section id="hotels" class="section" data-anchor>
-  <div class="wrap">
-    <div class="eyebrow">08 · Проверить по отелям</div>
-    <h2 class="h2 font-display" data-rise>До заезда — уточнить на месте</h2>
-
-    <div class="two-col" data-rise style="align-items:start;">
-      <template x-for="h in hotels" :key="h.h">
-        <div class="hotel-card">
-          <h4 x-text="h.h"></h4>
-          <ul>
-            <template x-for="(it, ii) in h.items" :key="ii">
-              <li x-html="it"></li>
-            </template>
-          </ul>
-        </div>
-      </template>
-    </div>
-  </div>
-</section>
-
 <!-- CHECKLIST -->
 <section id="checklist" class="section" data-anchor>
   <div class="wrap">
-    <div class="eyebrow">09 · Чек-лист</div>
+    <div class="eyebrow">08 · Чек-лист</div>
     <h2 class="h2 font-display" data-rise>Что забронировать, что не забыть</h2>
 
     <div class="chk-counter" aria-live="polite">
@@ -591,7 +569,7 @@
 <!-- VERIFY -->
 <section id="verify" class="section" data-anchor>
   <div class="wrap">
-    <div class="eyebrow">10 · Что ещё проверить</div>
+    <div class="eyebrow">09 · Что ещё проверить</div>
     <h2 class="h2 font-display" data-rise>Открытые вопросы</h2>
     <ul class="verify" data-rise>
       <template x-for="(v, vi) in verify" :key="vi">
@@ -601,22 +579,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="tiny">Три вещи горят</div>
-    <div class="fire" data-rise>
-      <div class="item"><b>1.</b> Отели в Кансае — рёкан Идзу 26.11 ещё не забронирован.</div>
-      <div class="item"><b>2.</b> Разговор с начальником про 19–20 ноября.</div>
-      <div class="item"><b>3.</b> Ghibli Park — 10 сентября, 08:00 МСК, Premium-билет. Остальное терпит до сентября.</div>
-    </div>
-
-    <div style="border-top:1px solid var(--line); padding-top:20px; display:flex; gap:20px; flex-wrap:wrap; justify-content:space-between;">
-      <div>© 2026 · Личный путеводитель для четверых · не для перепродажи</div>
-      <div>Фото — Wikimedia Commons, лицензии CC BY-SA / CC BY. Иероглифика — Google Fonts Cormorant.</div>
-    </div>
-  </div>
-</footer>
 
 <script src="js/data.js"></script>
 <script src="js/store.js"></script>

@@ -1,4 +1,10 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(node -c js/data.js)",
+      "Bash(node -c /Users/admin/Desktop/Projects/plan/js/data.js)"
+    ]
+  },
   "skillOverrides": {
     "00-andruia-consultant": "name-only"
   }

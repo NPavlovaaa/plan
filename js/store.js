@@ -2,10 +2,20 @@ document.addEventListener('alpine:init', () => {
   Alpine.store('trip', {
     active: 'd1',
     variants: { d6: 'A', d10: 'A', d13: 'A' },
-    checked: { '0.0': true, '0.1': true },
+    checked: {},
+    init() {
+      try {
+        this.checked = JSON.parse(localStorage.getItem('trip-checked')) || {};
+      } catch (e) {
+        this.checked = {};
+      }
+    },
     setActive(id) { this.active = id; },
     setVar(id, v) { this.variants[id] = v; },
-    toggle(key) { this.checked[key] = !this.checked[key]; },
+    toggle(key) {
+      this.checked[key] = !this.checked[key];
+      localStorage.setItem('trip-checked', JSON.stringify(this.checked));
+    },
     isChecked(key) { return !!this.checked[key]; },
     doneCount() { return Object.values(this.checked).filter(Boolean).length; },
     totalCount() {
@@ -14,7 +24,7 @@ document.addEventListener('alpine:init', () => {
   });
 
   Alpine.data('trip', () => ({
-    days, checklist, verify, budget, facts, luggage, shops, hotels, chains,
+    days, checklist, verify, budget, facts, luggage, shops, chains,
     fmt(y) { return y === '—' || y === '(в цене)' ? y : `¥${y.replace('¥', '')}`; },
     dayIds() { return days.map(d => d.id); },
     regionDays(r) { return days.filter(d => d.region === r); },

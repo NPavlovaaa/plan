@@ -191,12 +191,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   user-select: none; -webkit-user-drag: none; pointer-events: none;
 }
 .slide-cap {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 20px 14px 10px;
-  background: linear-gradient(transparent, rgba(23,21,15,0.65));
+  position: absolute; right: 12px; bottom: 12px; z-index: 3;
+  max-width: 60%;
+  padding: 4px 10px; background: rgba(23,21,15,0.7);
   color: rgba(246,241,231,0.92);
-  font-size: 12px; letter-spacing: 0.04em;
-  pointer-events: none; z-index: 2;
+  font-size: 11px; letter-spacing: 0.04em; text-align: right;
+  pointer-events: none;
 }
 .day-photo .ph {
   position: absolute; inset: 0; display: none;
@@ -316,12 +316,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .notes { padding: 12px 22px 20px; display: grid; gap: 10px; }
 .note {
   padding: 12px 14px; border-left: 3px solid var(--line); background: rgba(255,255,255,0.35);
-  display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; align-items: baseline;
+  display: grid; grid-template-columns: 1fr; gap: 6px; align-items: start;
 }
 .note.tip  { border-left-color: var(--moss); }
 .note.rain { border-left-color: var(--indigo); }
 .note.warn { border-left-color: var(--momiji); }
 .note .l {
+  justify-self: start; width: fit-content;
   font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
   padding: 2px 6px; border: 1px solid; white-space: nowrap; font-family: 'Cormorant', serif;
 }
@@ -414,20 +415,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   content: ''; position: absolute; left: 0; top: 18px;
   width: 16px; height: 1px; background: var(--momiji);
 }
-
-/* ---- footer ---- */
-footer {
-  padding: 40px 0 60px; border-top: 1px solid var(--line);
-  color: var(--ink2); font-size: 13px;
-}
-footer .fire {
-  display: grid; gap: 12px; margin: 20px 0 32px;
-}
-footer .fire .item {
-  padding: 14px 16px; border-left: 3px solid var(--momiji);
-  background: rgba(178,58,23,0.05); color: var(--ink);
-}
-footer .fire .item b { color: var(--momiji); font-family: 'Cormorant', serif; font-size: 18px; margin-right: 8px; }
 
 /* ---- shops / neighbourhood ---- */
 .shop-card {
